@@ -15,3 +15,6 @@ if your system unix use "sudo -s"
 Next go to in browser http://localhost:3000/
 
 Чтобы очистить кэш в npm, нам нужно запустить команду npm cache clean --force
+
+refresh all packeges
+npx npm-check-updates -u && npm i
