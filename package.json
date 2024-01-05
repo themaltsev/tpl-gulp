@@ -38,8 +38,6 @@
         "postcss-load-config": "^5.0.2",
         "postcss-loader": "^7.3.4",
         "sass": "^1.69.7",
-        "sass-loader": "^13.3.3",
-        "style-loader": "^3.3.3",
         "webpack": "^5.89.0",
         "webpack-build-report": "^1.1.2",
         "webpack-bundle-analyzer": "^4.10.1",
