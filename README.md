@@ -18,3 +18,5 @@ Next go to in browser http://localhost:3000/
 
 refresh all packeges
 npx npm-check-updates -u && npm i
+
+Точка входа js/app.js
