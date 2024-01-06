@@ -24,4 +24,5 @@ npx npm-check-updates -u && npm i
 Точка входа / entry point
 
 JS - js/app.js
+
 CSS - sass/main.sass
