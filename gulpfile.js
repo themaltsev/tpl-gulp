@@ -1,25 +1,41 @@
-const syntax = 'sass'; // Syntax: sass or scss;
+import path from 'path';
+import { fileURLToPath } from 'url';
+import gulp from 'gulp';
+import browserSync from 'browser-sync';
+import cleancss from 'gulp-clean-css';
+import concat from 'gulp-concat';
+import rename from 'gulp-rename';
+import validate from 'gulp-w3c-css';
+import csslint from 'gulp-csslint';
 
-const gulp = require('gulp'),
-    sass = require('gulp-sass')(require('sass')),
-    browserSync = require('browser-sync'),
-    cleancss = require('gulp-clean-css'),
-    rename = require('gulp-rename'),
-    autoprefixer = require('gulp-autoprefixer'),
-    notify = require('gulp-notify'),
-    rsync = require('gulp-rsync'),
-    webpackStream = require('webpack-stream');
-    webpack = require('webpack');
-    webpackDev = require('./webpack.dev.js'),
-    webpackProd = require('./webpack.prod.js'),
-    postcss = require('gulp-postcss'),
+
+import notify from 'gulp-notify';
+import webpackDev from './webpack.dev.js';
+import webpackProd from './webpack.prod.js';
+
+import webpack from 'webpack-stream';
+
+import postcss from 'gulp-postcss';
+import autoprefixer from 'autoprefixer';
+
+// import dartSass from 'sass';
+// import gulpSass from 'gulp-sass';
+// const sass = gulpSass(dartSass);
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// const syntax = 'sass'
+
+
 
 gulp.task('browser-sync', function() {
     browserSync({
         server: {
-            baseDir: 'app'
+            baseDir: 'src'
         },
-        // notify: true,
+        notify: true,
         open: false,
         // online: false, // Work Offline Without Internet Connection
         // tunnel: true, tunnel: "projectname", // Demonstration page: http://projectname.localtunnel.me
@@ -27,66 +43,55 @@ gulp.task('browser-sync', function() {
 });
 
 
+
 gulp.task('styles', function() {
-    return gulp.src('app/' + syntax + '/**/*.' + syntax + '')
-        .pipe(sass({ outputStyle: 'expanded' }).on("error", notify.onError()))
+
+    return gulp.src('src/css/**/*.css')
+
+        .pipe(concat('main.css'))
         .pipe(rename({ suffix: '.min', prefix: '' }))
+        .pipe(csslint())
+        .pipe(csslint.formatter())
         .pipe(cleancss({ level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
-        .pipe(autoprefixer())
-        .pipe(gulp.dest('app/assets'))
+        .pipe(postcss([autoprefixer()]))
+        .pipe(gulp.dest('src/assets'))
         .pipe(browserSync.stream())
+    
+        
 });
 
 
-
-gulp.task('code', function() {
-    return gulp.src('app/*.html')
+gulp.task('code', () => {
+    return gulp.src('src/*.html')
         .pipe(browserSync.reload({ stream: true }))
 });
 
 
-
-gulp.task('js', function () {
+gulp.task('js', () => {
     return gulp
-        .src('./app/assets/scripts.min.js')
-        .pipe(webpackStream(webpackDev,webpack))
-        .pipe(gulp.dest('app/js'))
+        .src(`src/js/app.js`)
+        .pipe(webpack(webpackDev))
+        .pipe(gulp.dest('./src/assets/'))
+        .pipe(browserSync.reload({ stream: true }));
+    });
+
+gulp.task('jsProd', () => {
+    return gulp
+        .src(`src/js/app.js`)
+        .pipe(webpack(webpackProd))
+        .pipe(gulp.dest('./src/assets/'))
         .pipe(browserSync.reload({ stream: true }));
     });
 
 
-gulp.task('jsPr', function () {
-    return gulp
-        .src('./app/assets/scripts.min.js')
-        .pipe(webpackStream(webpackProd,webpack))
-        .pipe(gulp.dest('app/js'))
-        .pipe(browserSync.reload({ stream: true }));
-    });
 
-
-
-gulp.task('watch', function() {
-    gulp.watch('app/css/*.css', gulp.parallel('styles'));
-    gulp.watch('app/sass/*.sass', gulp.parallel('styles'));
-    gulp.watch(['app/js/*/*/*.js'], gulp.parallel('js'));
-    gulp.watch(['app/js/*/*.js'], gulp.parallel('js'));
-    gulp.watch(['app/js/*.js'], gulp.parallel('js'));
-    gulp.watch('app/*.html', gulp.parallel('code'))
-});
-
-
-gulp.task('watchProd', function() {
-    gulp.watch('app/css/*.css', gulp.parallel('styles'));
-    gulp.watch('app/sass/*.sass', gulp.parallel('styles'));
-    gulp.watch(['app/js/*/*/*.js'], gulp.parallel('jsPr'));
-    gulp.watch(['app/js/*/*.js'], gulp.parallel('jsPr'));
-    gulp.watch(['app/js/*.js'], gulp.parallel('jsPr'));
-    gulp.watch('app/*.html', gulp.parallel('code'))
+gulp.task('watch', ()=> {
+    gulp.watch('src/css/*.css', gulp.parallel('styles'));
+    gulp.watch('src/sass/*.sass', gulp.parallel('styles'));
+    gulp.watch(['src/js/*'], gulp.parallel('js'));
+    gulp.watch('src/*.html', gulp.parallel('code'))
 });
 
 
 gulp.task('default', gulp.parallel('browser-sync', 'styles', 'watch', 'js', ));
-gulp.task('prod', gulp.parallel('browser-sync', 'styles', 'watchProd', 'jsPr'));
-
-
-
+gulp.task('prod', gulp.parallel('browser-sync', 'styles', 'watch', 'jsProd', ));

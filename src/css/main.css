@@ -153,6 +153,10 @@ li {
   list-style-type: none;
 }
 
+h1 {
+  display: flex;
+}
+
 h2, h3 , h4, h5, h6, p ,ol{
   padding: 0;
   margin: 0;
@@ -262,3 +266,9 @@ a:hover {
 
 /* --------------------verstka start--------------------- */
 
+
+.example {
+  display: flex;
+  transition: all 0.5s;
+  user-select: none;
+}

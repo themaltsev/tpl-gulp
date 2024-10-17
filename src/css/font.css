@@ -1,0 +1,26 @@
+/* Push Fonts CSS*/
+
+@font-face {
+    font-family: '1';
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/helvetica/HelveticaRegular/HelveticaRegular.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/helvetica/HelveticaRegular/HelveticaRegular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/helvetica/HelveticaRegular/HelveticaRegular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/helvetica/HelveticaRegular/HelveticaRegular.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../fonts/helvetica/HelveticaRegular/HelveticaRegular.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/helvetica/HelveticaRegular/HelveticaRegular.svg#svgFontName') format('svg'); /* Legacy iOS */
+}asdasd
+@font-face {
+    font-family: '1';
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/helvetica/HelveticaBold/HelveticaBold.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/helvetica/HelveticaBold/HelveticaBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/helvetica/HelveticaBold/HelveticaBold.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/helvetica/HelveticaBold/HelveticaBold.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../fonts/helvetica/HelveticaBold/HelveticaBold.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/helvetica/HelveticaBold/HelveticaBold.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
