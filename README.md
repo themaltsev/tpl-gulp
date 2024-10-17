@@ -25,4 +25,4 @@ npx npm-check-updates -u && npm i
 
 JS - js/app.js
 
-CSS - sass/main.sass
+CSS - Все файлы в папке /css обьединяются в один очищенный и минифицированный бандл
