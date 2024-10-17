@@ -5,7 +5,8 @@ Easy start for coding on JS
 Gulp основной сборщик
 Webpack собирает только js
 
-Если ты не под виндой / if your system unix use 
+Если ты не под виндой / if your system unix \n
+Используй 
 sudo -s
 
 Просто установи все зависимости
