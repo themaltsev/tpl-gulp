@@ -11,7 +11,7 @@
          url('../fonts/helvetica/HelveticaRegular/HelveticaRegular.woff') format('woff'), /* Pretty Modern Browsers */
          url('../fonts/helvetica/HelveticaRegular/HelveticaRegular.ttf')  format('truetype'), /* Safari, Android, iOS */
          url('../fonts/helvetica/HelveticaRegular/HelveticaRegular.svg#svgFontName') format('svg'); /* Legacy iOS */
-}asdasd
+}
 @font-face {
     font-family: '1';
     font-display: swap;

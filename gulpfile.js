@@ -1,36 +1,25 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
+// import path from 'path';
+// import { fileURLToPath } from 'url';
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
+
 import gulp from 'gulp';
 import browserSync from 'browser-sync';
 import cleancss from 'gulp-clean-css';
 import concat from 'gulp-concat';
 import rename from 'gulp-rename';
-import validate from 'gulp-w3c-css';
-import csslint from 'gulp-csslint';
 
-
-import notify from 'gulp-notify';
-import webpackDev from './webpack.dev.js';
-import webpackProd from './webpack.prod.js';
 
 import webpack from 'webpack-stream';
-
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 
-// import dartSass from 'sass';
-// import gulpSass from 'gulp-sass';
-// const sass = gulpSass(dartSass);
+import webpackDev from './webpack.dev.js';
+import webpackProd from './webpack.prod.js';
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// const syntax = 'sass'
-
-
-
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', function () {
     browserSync({
         server: {
             baseDir: 'src'
@@ -43,21 +32,18 @@ gulp.task('browser-sync', function() {
 });
 
 
-
-gulp.task('styles', function() {
+gulp.task('styles', function () {
 
     return gulp.src('src/css/**/*.css')
 
         .pipe(concat('main.css'))
         .pipe(rename({ suffix: '.min', prefix: '' }))
-        .pipe(csslint())
-        .pipe(csslint.formatter())
         .pipe(cleancss({ level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
         .pipe(postcss([autoprefixer()]))
         .pipe(gulp.dest('src/assets'))
         .pipe(browserSync.stream())
-    
-        
+
+
 });
 
 
@@ -73,7 +59,7 @@ gulp.task('js', () => {
         .pipe(webpack(webpackDev))
         .pipe(gulp.dest('./src/assets/'))
         .pipe(browserSync.reload({ stream: true }));
-    });
+});
 
 gulp.task('jsProd', () => {
     return gulp
@@ -81,11 +67,10 @@ gulp.task('jsProd', () => {
         .pipe(webpack(webpackProd))
         .pipe(gulp.dest('./src/assets/'))
         .pipe(browserSync.reload({ stream: true }));
-    });
+});
 
 
-
-gulp.task('watch', ()=> {
+gulp.task('watch', () => {
     gulp.watch('src/css/*.css', gulp.parallel('styles'));
     gulp.watch('src/sass/*.sass', gulp.parallel('styles'));
     gulp.watch(['src/js/*'], gulp.parallel('js'));
@@ -93,5 +78,5 @@ gulp.task('watch', ()=> {
 });
 
 
-gulp.task('default', gulp.parallel('browser-sync', 'styles', 'watch', 'js', ));
-gulp.task('prod', gulp.parallel('browser-sync', 'styles', 'watch', 'jsProd', ));
+gulp.task('default', gulp.parallel('browser-sync', 'styles', 'watch', 'js',));
+gulp.task('prod', gulp.parallel('browser-sync', 'styles', 'watch', 'jsProd',));
