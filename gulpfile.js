@@ -61,15 +61,16 @@ gulp.task('code', () => {
 gulp.task('js', () => {
     return gulp
         .src(`src/js/app.js`)
-        .pipe(webpack(webpackDev))
+        .pipe(webpack(webpackDev),webpack(webpackDev))
         .pipe(gulp.dest('./src/assets/'))
         .pipe(browserSync.reload({ stream: true }));
+        
 });
 
 gulp.task('jsProd', () => {
     return gulp
         .src(`src/js/app.js`)
-        .pipe(webpack(webpackProd))
+        .pipe(webpack(webpackProd),webpack(webpackProd))
         .pipe(gulp.dest('./src/assets/'))
         .pipe(browserSync.reload({ stream: true }));
 });
@@ -78,7 +79,7 @@ gulp.task('jsProd', () => {
 gulp.task('watch', () => {
     gulp.watch('src/css/*.css', gulp.parallel('styles'));
     gulp.watch('src/sass/*.sass', gulp.parallel('styles'));
-    gulp.watch(['src/js/*'], gulp.parallel('js'));
+    gulp.watch(['src/js/*.js'], gulp.parallel('js'));
     gulp.watch('src/*.html', gulp.parallel('code'))
 });
 

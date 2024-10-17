@@ -1,6 +1,6 @@
 import './vars.js';
 
-async function testAsync() {
+const testAsync =  async () => {
    await console.log('async working!')
 }
 testAsync()
