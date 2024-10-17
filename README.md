@@ -12,9 +12,9 @@ Webpack собирает только js
 
 Просто установи все зависимости
 
-1. JUST npm i or yarn install
-2. command: "gulp" or "gulp prod"
-3. Или npn run dev | npm run prod 
+1. Установи все зависимости > npm i or yarn install
+2. Запуск: в терминале cd 'путь до папки'
+3. "gulp" or "gulp prod" или так > npn run dev | npm run prod 
 
 Next go to in browser http://localhost:3000
 

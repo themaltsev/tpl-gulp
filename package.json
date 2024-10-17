@@ -1,20 +1,16 @@
 {
-    "name": "M4lets_DEV_TPL",
+    "name": "iMalets Front TPL GULP+WebPack",
     "version": "1.0.0",
     "type": "module",
-    "description": "develop this --- Aleksandr Maltsev ",
+    "description": "developed - Aleksandr Maltsev ",
     "scripts": {
         "dev": "gulp",
         "prod": "gulp prod"
-    },
-    "resolutions": {
-        "graceful-fs": "^4.2.11"
     },
     "author": "Aleksandr Maltsev",
     "license": "ISC",
     "devDependencies": {
         "@babel/core": "^7.25.8",
-        "@babel/preset-env": "^7.25.8",
         "autoprefixer": "^10.4.20",
         "babel-loader": "^9.2.1",
         "browser-sync": "^3.0.3",
@@ -22,24 +18,11 @@
         "gulp-autoprefixer": "^9.0.0",
         "gulp-clean-css": "^4.3.0",
         "gulp-concat": "^2.6.1",
-        "gulp-css-validator": "^0.0.4",
-        "gulp-csslint": "^1.0.1",
-        "gulp-notify": "^5.0.0",
         "gulp-postcss": "^10.0.0",
-        "gulp-rb-validate-css": "^1.0.1",
         "gulp-rename": "^2.0.0",
-        "gulp-sass": "^5.1.0",
         "gulp-webpack": "^1.5.0",
-        "gulp5-sass-plugin": "^2.0.3",
-        "sass": "^1.80.1",
-        "webpack": "^5.95.0",
-        "webpack-build-report": "^1.1.2",
-        "webpack-bundle-analyzer": "^4.10.2",
-        "webpack-cli": "^5.1.4",
         "webpack-stream": "^7.0.0"
     },
     "dependencies": {
-        "gulp-w3c-css": "^2.0.0",
-        "gulplog": "^2.2.0"
     }
 }
