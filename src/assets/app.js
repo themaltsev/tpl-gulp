@@ -15,6 +15,7 @@
   var testAsync = async () => {
     await console.log("Check async funtions: Ok");
   };
+  testAsync();
   try {
     console.log("Check babel job:", testAsync);
   } catch (error) {
