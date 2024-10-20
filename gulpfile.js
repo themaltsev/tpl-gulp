@@ -12,6 +12,7 @@ import rename from 'gulp-rename';
 import notify from 'gulp-notify'
 
 import gulpEsbuild from  "gulp-esbuild"
+import babel from 'esbuild-plugin-babel'
 
 
 import dartSass from 'sass';
@@ -24,7 +25,7 @@ const sass = gulpSass(dartSass);
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 
-import babel from 'esbuild-plugin-babel'
+
 
 gulp.task('browser-sync', function () {
     browserSync({
