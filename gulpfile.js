@@ -24,9 +24,6 @@ const sass = gulpSass(dartSass);
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 
-//import webpackDev from './webpack.dev.js';
-//import webpackProd from './webpack.prod.js';
-
 import babel from 'esbuild-plugin-babel'
 
 gulp.task('browser-sync', function () {
