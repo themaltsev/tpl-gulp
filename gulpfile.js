@@ -26,11 +26,15 @@ const esb_config = {
     minify: false,
     sourcemap: true,
     logLevel: "info", // Provides detailed output statistics
-    plugins: [
-        alias({
-            '@': './src',
-          }),
-    ],
+    // Define aliases
+    alias: {
+        '@p': './src/js/custom-plugin',
+        '@l': './src/js/libs',
+        '@z': './src/js/zayavka',
+        '~': './src',
+        '@': './src/js', // Убедитесь, что тут правильный путь
+        '@s': './src/css',
+    },
 }
 
 const esb_config_PROD = {
@@ -41,10 +45,15 @@ const esb_config_PROD = {
     logLevel: "info", // Provides detailed output statistics
     plugins: [
         babel(),
-        alias({
-            '@': './src',
-          }),
     ],
+    alias: {
+        '@p': './src/js/custom-plugin',
+        '@l': './src/js/libs',
+        '@z': './src/js/zayavka',
+        '~': './src',
+        '@': './src/js', // Убедитесь, что тут правильный путь
+        '@s': './src/css',
+    },
     //target: browserslistToEsbuild(), // --> ["chrome79", "edge92", "firefox91", "safari13.1"
 }
 
