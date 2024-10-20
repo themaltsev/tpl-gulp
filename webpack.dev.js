@@ -1,6 +1,6 @@
 export default {
-  // mode: 'production',
-  mode: "development",
+  mode: 'production',
+  //mode: "development",
   devtool: "source-map",
   //Точка входа по дефу index.js
   entry: `./src/js/app.js`,

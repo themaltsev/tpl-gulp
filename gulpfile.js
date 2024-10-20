@@ -7,23 +7,27 @@
 import gulp from 'gulp';
 import browserSync from 'browser-sync';
 import cleancss from 'gulp-clean-css';
-import concat from 'gulp-concat';
+//import concat from 'gulp-concat';
 import rename from 'gulp-rename';
 import notify from 'gulp-notify'
+
+import gulpEsbuild from  "gulp-esbuild"
 
 
 import dartSass from 'sass';
 import gulpSass from 'gulp-sass';
 const sass = gulpSass(dartSass);
 
+// import * as sass from 'sass'
 
-import webpack from 'webpack-stream';
+//import webpack from 'webpack-stream';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 
-import webpackDev from './webpack.dev.js';
-import webpackProd from './webpack.prod.js';
+//import webpackDev from './webpack.dev.js';
+//import webpackProd from './webpack.prod.js';
 
+import babel from 'esbuild-plugin-babel'
 
 gulp.task('browser-sync', function () {
     browserSync({
@@ -58,21 +62,31 @@ gulp.task('code', () => {
 });
 
 
+// gulp.task('js', () => {
+//     return gulp
+//         .src(`src/js/app.js`)
+//         .pipe(webpack(webpackDev),webpack(webpackDev))
+//         .pipe(gulp.dest('./src/assets/'))
+//         .pipe(browserSync.reload({ stream: true }));
+        
+// });
+
 gulp.task('js', () => {
     return gulp
         .src(`src/js/app.js`)
-        .pipe(webpack(webpackDev),webpack(webpackDev))
+        //.pipe(webpack(webpackProd),webpack(webpackProd
+        .pipe(gulpEsbuild({
+            outfile: "scripts.min.js",
+            bundle: true,
+            minify: true,
+            sourcemap: true,
+            logLevel: "info", // Provides detailed output statistics
+            plugins: [babel()],
+            //target: browserslistToEsbuild(), // --> ["chrome79", "edge92", "firefox91", "safari13.1"
+        }))
         .pipe(gulp.dest('./src/assets/'))
-        .pipe(browserSync.reload({ stream: true }));
-        
-});
+        .pipe(browserSync.reload({ stream: true }))
 
-gulp.task('jsProd', () => {
-    return gulp
-        .src(`src/js/app.js`)
-        .pipe(webpack(webpackProd),webpack(webpackProd))
-        .pipe(gulp.dest('./src/assets/'))
-        .pipe(browserSync.reload({ stream: true }));
 });
 
 
@@ -85,4 +99,3 @@ gulp.task('watch', () => {
 
 
 gulp.task('default', gulp.parallel('browser-sync', 'styles', 'watch', 'js',));
-gulp.task('prod', gulp.parallel('browser-sync', 'styles', 'watch', 'jsProd',));
