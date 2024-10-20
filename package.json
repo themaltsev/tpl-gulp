@@ -13,6 +13,7 @@
         "@babel/preset-env": "^7.25.8",
         "autoprefixer": "^10.4.20",
         "browser-sync": "^3.0.3",
+        "esbuild-plugin-alias": "^0.2.1",
         "esbuild-plugin-babel": "^0.2.3",
         "gulp": "^5.0.0",
         "gulp-autoprefixer": "^9.0.0",

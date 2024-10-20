@@ -1,17 +1,15 @@
 import './vars';
 
+console.log('Check import functions:', $("body"));
+
 const testAsync =  async () => {
-   await console.log('async working!')
+   await console.log('Check async funtions: Ok')
 }
 
-
-console.log($("body"));
-
-
 try {
-   console.log('Test babel js and async functions OK!', testAsync);
+   console.log('Check babel job:', testAsync);
 } catch (error) {
-      console.log(error);
+      console.log('Error', error);
 }
 
 

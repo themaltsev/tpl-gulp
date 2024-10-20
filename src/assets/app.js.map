@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/js/vars.js", "src/js/app.js"],
+  "sourcesContent": ["//global vars\r\n\r\nwindow.$ = (el) => document.querySelector(el);\r\nwindow.$$ = (el) => document.querySelectorAll(el);\r\n\r\nwindow.isMobile = () => {\r\nif(/Android|webOS|iPhone|iPad|iPod|pocket|psp|kindle|avantgo|blazer|midori|Tablet|Palm|maemo|plucker|phone|BlackBerry|symbian|IEMobile|mobile|ZuneWP7|Windows Phone|Opera Mini/i.test(navigator.userAgent)) {\r\nreturn true;\r\n};\r\nreturn false;\r\n}\r\n\r\n\r\n  \r\n\r\n", "import './vars';\r\n\r\nconsole.log('Check import functions:', $(\"body\"));\r\n\r\nconst testAsync =  async () => {\r\n   await console.log('Check async funtions: Ok')\r\n}\r\n\r\ntry {\r\n   console.log('Check babel job:', testAsync);\r\n} catch (error) {\r\n      console.log('Error', error);\r\n}\r\n\r\n\r\n\r\n\r\n"],
+  "mappings": ";;AAEA,SAAO,IAAI,CAAC,OAAO,SAAS,cAAc,EAAE;AAC5C,SAAO,KAAK,CAAC,OAAO,SAAS,iBAAiB,EAAE;AAEhD,SAAO,WAAW,MAAM;AACxB,QAAG,8KAA8K,KAAK,UAAU,SAAS,GAAG;AAC5M,aAAO;AAAA,IACP;AAAC;AACD,WAAO;AAAA,EACP;;;ACRA,UAAQ,IAAI,2BAA2B,EAAE,MAAM,CAAC;AAEhD,MAAM,YAAa,YAAY;AAC5B,UAAM,QAAQ,IAAI,0BAA0B;AAAA,EAC/C;AAEA,MAAI;AACD,YAAQ,IAAI,oBAAoB,SAAS;AAAA,EAC5C,SAAS,OAAO;AACV,YAAQ,IAAI,SAAS,KAAK;AAAA,EAChC;",
+  "names": []
+}

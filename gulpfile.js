@@ -11,8 +11,42 @@ import cleancss from 'gulp-clean-css';
 import rename from 'gulp-rename';
 import notify from 'gulp-notify'
 
-import gulpEsbuild from  "gulp-esbuild"
+import {createGulpEsbuild} from  "gulp-esbuild"
+const gulpEsbuild = createGulpEsbuild({
+    incremental: true, // enables the esbuild's incremental build
+    piping: true,      // enables piping
+})
 import babel from 'esbuild-plugin-babel'
+import alias from 'esbuild-plugin-alias'
+
+
+const esb_config = {
+    outfile: "app.js",
+    bundle: true,
+    minify: false,
+    sourcemap: true,
+    logLevel: "info", // Provides detailed output statistics
+    plugins: [
+        alias({
+            '@': './src',
+          }),
+    ],
+}
+
+const esb_config_PROD = {
+    outfile: "scripts.min.js",
+    bundle: true,
+    minify: true,
+    sourcemap: true,
+    logLevel: "info", // Provides detailed output statistics
+    plugins: [
+        babel(),
+        alias({
+            '@': './src',
+          }),
+    ],
+    //target: browserslistToEsbuild(), // --> ["chrome79", "edge92", "firefox91", "safari13.1"
+}
 
 
 import dartSass from 'sass';
@@ -60,28 +94,19 @@ gulp.task('code', () => {
 });
 
 
-// gulp.task('js', () => {
-//     return gulp
-//         .src(`src/js/app.js`)
-//         .pipe(webpack(webpackDev),webpack(webpackDev))
-//         .pipe(gulp.dest('./src/assets/'))
-//         .pipe(browserSync.reload({ stream: true }));
-        
-// });
-
 gulp.task('js', () => {
     return gulp
         .src(`src/js/app.js`)
-        //.pipe(webpack(webpackProd),webpack(webpackProd
-        .pipe(gulpEsbuild({
-            outfile: "scripts.min.js",
-            bundle: true,
-            minify: true,
-            sourcemap: true,
-            logLevel: "info", // Provides detailed output statistics
-            plugins: [babel()],
-            //target: browserslistToEsbuild(), // --> ["chrome79", "edge92", "firefox91", "safari13.1"
-        }))
+        .pipe(gulpEsbuild(esb_config).on("error", notify.onError(), gulp.parallel('watch')))
+        .pipe(gulp.dest('./src/assets/'))
+        .pipe(browserSync.reload({ stream: true }))
+
+});
+
+gulp.task('js_PROD', () => {
+    return gulp
+        .src(`src/js/app.js`)
+        .pipe(gulpEsbuild(esb_config_PROD))
         .pipe(gulp.dest('./src/assets/'))
         .pipe(browserSync.reload({ stream: true }))
 
