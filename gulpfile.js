@@ -1,7 +1,7 @@
-// import path from 'path';
-// import { fileURLToPath } from 'url';
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 import gulp from 'gulp';
@@ -17,15 +17,15 @@ const gulpEsbuild = createGulpEsbuild({
     piping: true,      // enables piping
 })
 import babel from 'esbuild-plugin-babel'
-import alias from 'esbuild-plugin-alias'
-
 
 const esb_config = {
     outfile: "app.js",
-    bundle: true,
+    bundle: true, // Required for aliases to work
     minify: false,
     sourcemap: true,
     logLevel: "info", // Provides detailed output statistics
+    plugins: [
+    ],
     // Define aliases
     alias: {
         '@p': './src/js/custom-plugin',
@@ -43,9 +43,8 @@ const esb_config_PROD = {
     minify: true,
     sourcemap: true,
     logLevel: "info", // Provides detailed output statistics
-    plugins: [
-        babel(),
-    ],
+    plugins: [ babel()],
+    // Define aliases
     alias: {
         '@p': './src/js/custom-plugin',
         '@l': './src/js/libs',
