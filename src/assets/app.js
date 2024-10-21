@@ -10,6 +10,15 @@
     return false;
   };
 
+  // src/js/service-worker.js
+  if ("serviceWorker" in navigator && "PushManager" in window) {
+    navigator.serviceWorker.register("../sw").then((registration) => {
+      window.swreg = registration;
+    }).catch((err) => {
+      console.log("service worker not working");
+    });
+  } else console.log("serviceWorker is not supported");
+
   // src/js/app.js
   console.log("Check import functions:", $("body"));
   var testAsync = async () => {

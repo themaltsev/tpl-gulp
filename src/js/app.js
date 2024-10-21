@@ -1,4 +1,5 @@
-import './vars';
+import '@/vars'; // global vars 
+import '@/service-worker'; // enable service-worker
 
 console.log('Check import functions:', $("body"));
 
